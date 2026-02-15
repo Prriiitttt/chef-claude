@@ -1,8 +1,8 @@
 export default function ClaudeRecipe() {
   return (
     <section>
-      <h2>Chef Claude Recommends:</h2>
-      <article className="suggested-recipe-container" aria-live="polite">
+      <h2 className="suggestHead">Chef Claude Recommends:</h2>
+      <article className="suggestedRecipe" aria-live="polite">
         <p>
           Based on the ingredients you have available, I would recommend making
           a simple a delicious <strong>Beef Bolognese Pasta</strong>. Here is

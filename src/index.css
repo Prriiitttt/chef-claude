@@ -102,3 +102,11 @@ ul.ingredientsList > li {
     font-size: 0.875rem;
     cursor: pointer;
 }
+
+.suggestHead {
+  margin-top: 3.5rem;
+}
+
+.suggestedRecipe{
+  color: #475467;
+}
