@@ -4,47 +4,36 @@ import IngredientsList from "./components/IngredientsList";
 import { getRecipeFromGemma } from "./ai";
 
 export default function Main() {
-  const [ingredients, setIngredients] = useState([
-    "all the main spices",
-    "pasta",
-    "ground beef",
-    "tomato paste",
-  ]);
+  const [ingredients, setIngredients] = useState([]);
+  const [recipe, setRecipe] = useState("");
 
-  const [recipeShown, setRecipeShown] = useState(false);
+  async function getRecipe() {
+    const recipeMD = await getRecipeFromGemma(ingredients);
+    setRecipe(recipeMD);
+  }
 
   function handleSubmit(formData) {
     const newIngredient = formData.get("ingredient");
     setIngredients((prevIngredient) => [...prevIngredient, newIngredient]);
   }
 
-  function toggleRecipe() {
-    setRecipeShown((prevShown) => !prevShown);
-  }
-
   return (
-    <>
-      <main>
-        <form className="ingredientForm" action={handleSubmit}>
-          <input
-            type="text"
-            placeholder="e.g. wheat flour"
-            aria-label="Add ingredient"
-            name="ingredient"
-          />
-          <button>+ Add ingredient</button>
-        </form>
+    <main>
+      <form className="ingredientForm" action={handleSubmit}>
+        <input
+          type="text"
+          placeholder="e.g. pasta"
+          aria-label="Add ingredient"
+          name="ingredient"
+        />
+        <button>+ Add ingredient</button>
+      </form>
 
-        {ingredients.length > 0 && (
-          <IngredientsList
-            ingredients={ingredients}
-            recipeShown={recipeShown}
-            toggleRecipe={toggleRecipe}
-          />
-        )}
+      {ingredients.length > 0 && (
+        <IngredientsList ingredients={ingredients} getRecipe={getRecipe} />
+      )}
 
-        {recipeShown && <ClaudeRecipe />}
-      </main>
-    </>
+      {recipe && <ClaudeRecipe recipe={recipe} />}
+    </main>
   );
 }
