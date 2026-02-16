@@ -1,6 +1,7 @@
 import { useState } from "react";
 import ClaudeRecipe from "./components/ClaudeRecipe";
 import IngredientsList from "./components/IngredientsList";
+import { getRecipeFromGemma } from "./ai";
 
 export default function Main() {
   const [ingredients, setIngredients] = useState([
