@@ -6,15 +6,23 @@ import { getRecipeFromGemma } from "./ai";
 export default function Main() {
   const [ingredients, setIngredients] = useState([]);
   const [recipe, setRecipe] = useState("");
+  const [loading, setLoading] = useState(false)
 
   async function getRecipe() {
+    setLoading(true)
     const recipeMD = await getRecipeFromGemma(ingredients);
     setRecipe(recipeMD);
+    setLoading(false)
   }
 
   function handleSubmit(formData) {
     const newIngredient = formData.get("ingredient");
     setIngredients((prevIngredient) => [...prevIngredient, newIngredient]);
+  }
+
+  function reset () {
+    setIngredients([])
+    setRecipe("")
   }
 
   return (
@@ -30,10 +38,12 @@ export default function Main() {
       </form>
 
       {ingredients.length > 0 && (
-        <IngredientsList ingredients={ingredients} getRecipe={getRecipe} />
+        <IngredientsList ingredients={ingredients} getRecipe={getRecipe} loading={loading}/>
       )}
 
-      {recipe && <ClaudeRecipe recipe={recipe} />}
+      {loading && <p className="loading">Loading your recipe...</p>}
+      {!loading && recipe && <ClaudeRecipe recipe={recipe} />}
+      {recipe && <button className="resetBtn" onClick={reset}>Start over</button>}
     </main>
   );
 }

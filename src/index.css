@@ -110,3 +110,42 @@ ul.ingredientsList > li {
 .suggestedRecipe{
   color: #475467;
 }
+
+.suggestedRecipeContainer {
+  color: #475467;
+  line-height: 28px;
+  font-size: 1rem;
+  font-weight: 400;
+}
+
+.suggestedRecipeContainer > h2 {
+  color: black;
+}
+
+.suggestedRecipeContainer ul li, .suggestedRecipeContainer ol li {
+  margin-bottom: 8px;
+}
+
+.loading {
+  font-style: italic;
+  opacity: 0.8;
+  animation: pulse 1.2s infinite;
+}
+
+@keyframes pulse {
+  0% { opacity: 0.3; }
+  50% { opacity: 1; }
+  100% { opacity: 0.3; }
+}
+
+.resetBtn {
+  height: 36px;
+  width: 124px;
+  font-size: 12px;
+  background-color: black;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-family: Inter, sans-serif;
+}

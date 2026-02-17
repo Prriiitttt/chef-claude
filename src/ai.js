@@ -6,7 +6,6 @@ You are an assistant that receives a list of ingredients that a user has and sug
 const hf = new HfInference(import.meta.env.VITE_HF_TOKEN)
 
 export async function getRecipeFromGemma(ingredientsArr) {
-    console.log("ENV:", import.meta.env.VITE_HF_TOKEN)
     const ingredientsString = ingredientsArr.join(", ")
     try {
         const response = await hf.chatCompletion({
