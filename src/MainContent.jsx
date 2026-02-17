@@ -15,9 +15,9 @@ export default function Main() {
     setLoading(false)
   }
 
-  function handleSubmit(formData) {
+  function handleSubmit(formData, event) {
     const newIngredient = formData.get("ingredient");
-    setIngredients((prevIngredient) => [...prevIngredient, newIngredient]);
+    setIngredients(prevIngredients => [...prevIngredients, newIngredient]);
   }
 
   function reset () {
