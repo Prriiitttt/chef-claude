@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import ClaudeRecipe from "./components/ClaudeRecipe";
 import IngredientsList from "./components/IngredientsList";
 import { getRecipeFromGemma } from "./ai";
@@ -7,6 +7,16 @@ export default function Main() {
   const [ingredients, setIngredients] = useState([]);
   const [recipe, setRecipe] = useState("");
   const [loading, setLoading] = useState(false)
+  const recipeSection = useRef(null)
+
+  // console.log(recipeSection)
+
+  useEffect(() => {
+    if (recipe !== "" && recipeSection.current !== null) {
+      recipeSection.current.scrollIntoView({behavior : "smooth"})
+    } 
+  }, [recipe])
+  
 
   async function getRecipe() {
     setLoading(true)
@@ -42,7 +52,7 @@ export default function Main() {
       )}
 
       {loading && <p className="loading">Loading your recipe...</p>}
-      {!loading && recipe && <ClaudeRecipe recipe={recipe} />}
+      {!loading && recipe && <ClaudeRecipe recipe={recipe} ref={recipeSection}/>}
       {recipe && <button className="resetBtn" onClick={reset}>Start over</button>}
     </main>
   );
